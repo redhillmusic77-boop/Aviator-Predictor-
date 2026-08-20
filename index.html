@@ -316,7 +316,7 @@
         let randomVal;
         do {
             // Generates random float between 0.21 and 999.99
-            randomVal = (Math.random() * (999.99 - 0.21) + 0.21).toFixed(2);
+            randomVal = (Math.random() * (21.99 - 0.21) + 0.21).toFixed(2);
         } while (usedMultipliers.has(randomVal));
 
         usedMultipliers.add(randomVal);
