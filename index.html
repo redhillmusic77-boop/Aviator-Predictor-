@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #050508;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #0d0e15, #151824);
+            border: 1px solid #1f2438;
+            box-shadow: 0 0 25px rgba(230, 57, 70, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #e63946;
+            text-shadow: 0 0 12px rgba(230, 57, 70, 0.6);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #f1faee;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: #a8dadc;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #e63946, #d62828);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
+        }
+
+        /* Grid for Page 2 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .grid-btn {
+            background: #111420;
+            border: 1px solid #2a2f45;
+            color: #00f5d4;
+            padding: 12px 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .grid-btn:hover {
+            background: #00f5d4;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+        }
+
+        /* Form Inputs */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: #8d99ae;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #2b2d42;
+            background: #0b0c10;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #e63946;
+        }
+
+        .price-tag {
+            background: rgba(230, 57, 70, 0.15);
+            border: 1px dashed #e63946;
+            color: #ff4d6d;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        /* Display Screen Page 5 */
+        .display-box {
+            background: #000;
+            border: 2px solid #00f5d4;
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+            border-radius: 12px;
+            padding: 30px 10px;
+            margin-bottom: 20px;
+        }
+
+        .multiplier {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #00f5d4;
+            text-shadow: 0 0 15px rgba(0, 245, 212, 0.8);
+        }
+
+        /* Custom Popup */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: #161a23;
+            border: 1px solid #e63946;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .modal-content p {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- PAGE 1: Landing Page -->
+    <div id="page1" class="card">
+        <h1>Aviator Predictor 🚀</h1>
+        <p>Advanced Multiplier Prediction Algorithm</p>
+        <button class="btn" onclick="goToPage(2)">Next</button>
+    </div>
+
+    <!-- PAGE 2: Platform Selection Page -->
+    <div id="page2" class="card hidden">
+        <h2>Select Platform</h2>
+        <div class="grid">
+            <button class="grid-btn" onclick="goToPage(3)">1win</button>
+            <button class="grid-btn" onclick="goToPage(3)">1xbet</button>
+            <button class="grid-btn" onclick="goToPage(3)">4rbet</button>
+            <button class="grid-btn" onclick="goToPage(3)">91club</button>
+            <button class="grid-btn" onclick="goToPage(3)">66lottery</button>
+            <button class="grid-btn" onclick="goToPage(3)">Meltbet</button>
+            <button class="grid-btn" onclick="goToPage(3)">Spribe</button>
+            <button class="grid-btn" onclick="goToPage(3)">Other Aviator's</button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Mock Login Page -->
+    <div id="page3" class="card hidden">
+        <h2>Account Login</h2>
+        <div class="input-group">
+            <label>User ID</label>
+            <input type="text" id="userId" placeholder="Enter ID">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="userPass" placeholder="Enter Password">
+        </div>
+        <button class="btn" onclick="validateLogin()">Login</button>
+    </div>
+
+    <!-- PAGE 4: Activation Code Page -->
+    <div id="page4" class="card hidden">
+        <h2>Activation</h2>
+        <div class="price-tag">
+            Activation code is paid Price ₹500<br>
+            Contact Admin <b>@King_as_always</b> for discount
+        </div>
+        <div class="input-group">
+            <label>Activation Code</label>
+            <input type="text" id="actCode" placeholder="Enter Activation Code">
+        </div>
+        <button class="btn" onclick="validateActivation()">Submit Code</button>
+    </div>
+
+    <!-- PAGE 5: Fake Predictor Page -->
+    <div id="page5" class="card hidden">
+        <h2>Prediction Room</h2>
+        <div class="display-box">
+            <div id="multiplierDisplay" class="multiplier">00.00x</div>
+        </div>
+        <button class="btn" onclick="generateNextPrediction()">Next Prediction</button>
+    </div>
+
+</div>
+
+<!-- Modal Popup for Errors -->
+<div id="customModal" class="modal hidden">
+    <div class="modal-content">
+        <p id="modalText"></p>
+        <button class="btn" onclick="closeModal()">OK</button>
+    </div>
+</div>
+
+<script>
+    // Navigation Control
+    function goToPage(pageNumber) {
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`page${i}`).classList.add('hidden');
+        }
+        document.getElementById(`page${pageNumber}`).classList.remove('hidden');
+    }
+
+    // Modal Control
+    function showModal(message) {
+        document.getElementById('modalText').innerText = message;
+        document.getElementById('customModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('customModal').classList.add('hidden');
+    }
+
+    // Page 3 Logic
+    function validateLogin() {
+        const id = document.getElementById('userId').value.trim();
+        const pass = document.getElementById('userPass').value.trim();
+
+        if (id === "Admin@Aviator" && pass === "Admin2026") {
+            goToPage(4);
+        } else {
+            showModal("ID Password ke liye Telegram pe @King_as_always Ko dm kre");
+        }
+    }
+
+    // Page 4 Logic
+    function validateActivation() {
+        const code = document.getElementById('actCode').value.trim();
+
+        if (code === "GU72390") {
+            goToPage(5);
+        } else {
+            showModal("Invalid Activation Code! Contact @King_as_always");
+        }
+    }
+
+    // Page 5 Logic (Non-repeating random values)
+    let usedMultipliers = new Set();
+
+    function generateNextPrediction() {
+        if (usedMultipliers.size >= 99900) {
+            usedMultipliers.clear(); // Safe reset if all combinations are exhausted
+        }
+
+        let randomVal;
+        do {
+            // Generates random float between 0.21 and 999.99
+            randomVal = (Math.random() * (999.99 - 0.21) + 0.21).toFixed(2);
+        } while (usedMultipliers.has(randomVal));
+
+        usedMultipliers.add(randomVal);
+        document.getElementById('multiplierDisplay').innerText = `${randomVal}x`;
+    }
+</script>
+
+</body>
+</html>
